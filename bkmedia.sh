@@ -46,15 +46,6 @@ write_log() {
     echo "${user_host}:${port}:${backup_dir}:${timestamp}" >> "${LOG_FILE}"
 }
 
-display_comp_logs() {
-    local count=1
-    while IFS=':' read -r location oldSize newSize timestamp
-    do
-        echo "${location} ${oldSize} ${newSize} ${timestamp}"
-        ((count++))
-    done < "${COMPLOG_FILE}"
-}
-
 read_timestamps() {
     local filename="$1"
     local log_file="timewarp.log" 
@@ -347,10 +338,7 @@ if [[ $# -eq 0 ]]; then
 # Logs
 elif [[ "$1" == "-logs" ]]; then
     display_logs
-elif [[ "$1" == "-comp" ]]; then
-    display_comp_logs
-
-# Backup
+    
 elif [[ "$1" == "-B" ]]; then
 
     # Backing up from a specific location number

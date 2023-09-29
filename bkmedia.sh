@@ -46,14 +46,6 @@ write_log() {
     echo "${user_host}:${port}:${backup_dir}:${timestamp}" >> "${LOG_FILE}"
 }
 
-write_comp_log() {
-    local location="$1"
-    local oldSize="$2"
-    local newSize="$3"
-    local timestamp="$4"
-    echo "${location}:${oldSize}:${newSize}:${timestamp}" >> "${COMPLOG_FILE}"
-}
-
 display_comp_logs() {
     local count=1
     while IFS=':' read -r location oldSize newSize timestamp
@@ -248,7 +240,6 @@ compress_and_log(){
 
         # Log
         log_xyzar_file "$original_size" "$comp_size" "$timestamp" "$user_host"
-        write_comp_log "${user_host}" "$original_size" "$comp_size" "$timestamp"
             
     fi
 }
